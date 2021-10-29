@@ -1,0 +1,232 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/font-awesome.min.css")
+        link(rel="stylesheet", href=`/css/bootstrap.min.css`)
+        link(rel="stylesheet", href=`/css/main.css`)
+        script(src="/js/jquery.js")
+        title Monitoring
+    body
+        - 
+            turar_joy = yigindilar.g1 + yigindilar.g3 + yigindilar.g5 + yigindilar.g7 + yigindilar.g9 + yigindilar.g11 + yigindilar.g13 + yigindilar.g15 + yigindilar.g17 + yigindilar.g19 + yigindilar.g21 + yigindilar.g23
+            aholi = yigindilar.g2 + yigindilar.g4 + yigindilar.g6 + yigindilar.g8 + yigindilar.g10 + yigindilar.g12 + yigindilar.g14 + yigindilar.g16 + yigindilar.g18 + yigindilar.g20 + yigindilar.g22 + yigindilar.g24
+        .container
+            ul.nav.justify-content-end.nav-menu
+                li.nav-item
+                    a(class="nav-link" href="/") Bosh sahifa
+                li.nav-item
+                    a(class="nav-link" href="/staff") Xodimlar
+            .main-numbers
+                h5.text-center= user.full_name
+                .row(style="padding-top: 10px; padding-bottom: 20px;")
+                    .col-sm-6
+                        .card
+                            .card-body.main-card
+                                h5.card-title 
+                                    != `Turar joylar soni <span id='xonadon'>${turar_joy}</span> ta`
+                    .col-sm-6
+                        .card
+                            .card-body.main-card
+                                h5.card-title
+                                    != `Aholi soni <span id='aholi'>${aholi}</span> ta`
+        .table-container.table-responsive#tab
+            table.table.table-bordered
+                thead
+                    tr
+                        th(scope="col" rowspan="3") T/r
+                        th(scope="col" rowspan="3") Hisob uchastkasi nomi
+                        th(scope="col" colspan="24") Suhbat o'tkazilgan honadonlar va ro'yxatga olingan shahslar soni (1 va 2-shakil bo'yicha)
+                        th(scope="col" rowspan="2" colspan="2") Jami
+                    tr
+                        th(scope="col" colspan="2") 11-noyabr
+                        th(scope="col" colspan="2") 12-noyabr
+                        th(scope="col" colspan="2") 13-noyabr
+                        th(scope="col" colspan="2") 14-noyabr
+                        th(scope="col" colspan="2") 15-noyabr
+                        th(scope="col" colspan="2") 16-noyabr
+                        th(scope="col" colspan="2") 17-noyabr
+                        th(scope="col" colspan="2") 18-noyabr
+                        th(scope="col" colspan="2") 19-noyabr
+                        th(scope="col" colspan="2") 20-noyabr
+                        th(scope="col" colspan="2") 21-noyabr
+                        th(scope="col" colspan="2") 22-noyabr
+                    tr
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                        th(scope="col" class="vertical") 
+                            span Xonadonlar soni
+                        th(scope="col" class="vertical") 
+                            span Shaxslar soni
+                tbody
+                    - let tr = 0
+                    each item in report
+                        - 
+                            tr++
+                        tr(data-uchastka-id=`${item._id}` class="hisob-uchastka" data-row-number=`${item.number}`) 
+                            th= tr 
+                            th
+                                input#name(type="text", name="name", value=`${item.name}` disabled)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g1` type="number" name="g1", value=`${(item.col.g1)?item.col.g1:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g2` type="number" name="g2", value=`${(item.col.g2)?item.col.g2:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g3` type="number" name="g3", value=`${(item.col.g3)?item.col.g3:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g4` type="number" name="g4", value=`${(item.col.g4)?item.col.g4:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g5` type="number" name="g5", value=`${(item.col.g5)?item.col.g5:''}`)
+                            td
+                                input(data-row=`row${tr}` data-col=`g6` type="number" name="g6", value=`${(item.col.g6)?item.col.g6:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g7` type="number" name="g7", value=`${(item.col.g7)?item.col.g7:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g8` type="number" name="g8", value=`${(item.col.g8)?item.col.g8:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g9` type="number" name="g9", value=`${(item.col.g9)?item.col.g9:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g10` type="number" name="g10", value=`${(item.col.g10)?item.col.g10:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g11` type="number" name="g11", value=`${(item.col.g11)?item.col.g11:''}`)
+                            td
+                                input(data-row=`row${tr}` data-col=`g12` type="number" name="g12", value=`${(item.col.g12)?item.col.g12:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g13` type="number" name="g13", value=`${(item.col.g13)?item.col.g13:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g14` type="number" name="g14", value=`${(item.col.g14)?item.col.g14:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g15` type="number" name="g15", value=`${(item.col.g15)?item.col.g15:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g16` type="number" name="g16", value=`${(item.col.g16)?item.col.g16:''}`)
+                            td
+                                input(data-row=`row${tr}` data-col=`g17` type="number" name="g17", value=`${(item.col.g17)?item.col.g17:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g18` type="number" name="g18", value=`${(item.col.g18)?item.col.g18:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g19` type="number" name="g19", value=`${(item.col.g19)?item.col.g19:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g20` type="number" name="g20", value=`${(item.col.g20)?item.col.g20:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g21` type="number" name="g21", value=`${(item.col.g21)?item.col.g21:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g22` type="number" name="g22", value=`${(item.col.g22)?item.col.g22:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g23` type="number" name="g23", value=`${(item.col.g23)?item.col.g23:''}`)
+                            td 
+                                input(data-row=`row${tr}` data-col=`g24` type="number" name="g24", value=`${(item.col.g24)?item.col.g24:''}`)
+                            td 
+                                span(class="summa-row" data-col=`g25` row-number=`row${tr}`)= 0
+                            td 
+                                span(class="summa-row" data-col=`g26` row-number=`row${tr}`)= 0
+                    tr 
+                        th= tr+1
+                        th jami
+                        td 
+                            span(class="summa-col" col-number=`g1`)= yigindilar.g1 
+                        td 
+                            span(class="summa-col" col-number=`g2`)= yigindilar.g2 
+                        td 
+                            span(class="summa-col" col-number=`g3`)= yigindilar.g3 
+                        td 
+                            span(class="summa-col" col-number=`g4`)= yigindilar.g4  
+                        td 
+                            span(class="summa-col" col-number=`g5`)= yigindilar.g5 
+                        td 
+                            span(class="summa-col" col-number=`g6`)= yigindilar.g6  
+                        td 
+                            span(class="summa-col" col-number=`g7`)= yigindilar.g7 
+                        td 
+                            span(class="summa-col" col-number=`g8`)= yigindilar.g8 
+                        td 
+                            span(class="summa-col" col-number=`g9`)= yigindilar.g9 
+                        td 
+                            span(class="summa-col" col-number=`g10`)= yigindilar.g10 
+                        td 
+                            span(class="summa-col" col-number=`g11`)= yigindilar.g11
+                        td 
+                            span(class="summa-col" col-number=`g12`)= yigindilar.g12
+                        td 
+                            span(class="summa-col" col-number=`g13`)= yigindilar.g13
+                        td 
+                            span(class="summa-col" col-number=`g14`)= yigindilar.g14
+                        td 
+                            span(class="summa-col" col-number=`g15`)= yigindilar.g15
+                        td 
+                            span(class="summa-col" col-number=`g16`)= yigindilar.g16
+                        td 
+                            span(class="summa-col" col-number=`g17`)= yigindilar.g17
+                        td 
+                            span(class="summa-col" col-number=`g18`)= yigindilar.g18
+                        td 
+                            span(class="summa-col" col-number=`g19`)= yigindilar.g19
+                        td 
+                            span(class="summa-col" col-number=`g20`)= yigindilar.g20
+                        td 
+                            span(class="summa-col" col-number=`g21`)= yigindilar.g21
+                        td 
+                            span(class="summa-col" col-number=`g22`)= yigindilar.g22
+                        td 
+                            span(class="summa-col" col-number=`g23`)= yigindilar.g23
+                        td 
+                            span(class="summa-col" col-number=`g24`)= yigindilar.g24
+                        td 
+                            span(class="summa-col" col-number=`g25`)= aholi
+                        td 
+                            span(class="summa-col" col-number=`g26`)= turar_joy
+        p(style="padding: 0 10px; text-align: right; margin-top: -15px")
+            if offset - 10 > -10
+                a.pagination-link(href=`/staff/next?user_id=${user._id}&offset=${offset-10}`)= `<Oldingi`
+            if  offset + 10 < count
+                a.pagination-link(href=`/staff/next?user_id=${user._id}&offset=${offset+10}`)= `Keyingi>`
+        p(style="padding: 0 10px; text-align: right")
+            button(type="button" class="btn btn-secondary" id="update_report") Saqlash
+        script(src="/js/main.js") 
