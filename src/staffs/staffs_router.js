@@ -56,7 +56,8 @@ router.post('/', async(req, res) => {
                 report: report,
                 count: count,
                 offset: 0,
-                yigindilar: yigindilar
+                yigindilar: yigindilar,
+                temp: ""
             });
         } else {
             res.render('login_staff', {
@@ -75,8 +76,9 @@ router.get('/next', async(req, res) => {
         let user = await User.findOne({_id: req.query.user_id});
         if (user._id != undefined) {
             let offset = parseInt(req.query.offset);
-            let report = await Report.find({user_id: user._id}).limit(10).skip(offset);
-            let count = await Report.countDocuments({user_id: user._id});
+            let temp = (req.query.temp != "" && req.query.temp != undefined && req.query.temp != null)?req.query.temp:``;
+            let report = await Report.find({user_id: user._id, name: {$regex : temp}}).limit(10).skip(offset);
+            let count = await Report.countDocuments({user_id: user._id, name: {$regex : temp}});
             let allReport = await Report.find({user_id: user._id});
             let yigindilar = {
                 g1: 0,
@@ -114,7 +116,8 @@ router.get('/next', async(req, res) => {
                 count: count,
                 report: report,
                 offset: offset,
-                yigindilar: yigindilar
+                yigindilar: yigindilar,
+                temp: temp
             });
         } else {
             res.render('login_staff', {
@@ -127,6 +130,66 @@ router.get('/next', async(req, res) => {
         });
     }
 });
+
+
+// router.get('/search', async(req, res) => {
+//     try {
+//         let user = await User.findOne({_id: req.query.user_id});
+//         if (user._id != undefined) {
+//             let offset = parseInt(req.query.offset);
+//             let temp = req.query.temp && '';
+//             let report = await Report.find({user_id: user._id, name: {$regex : temp}}).limit(10).skip(offset);
+//             let count = await Report.countDocuments({user_id: user._id});
+//             let allReport = await Report.find({user_id: user._id});
+//             let yigindilar = {
+//                 g1: 0,
+//                 g2: 0,
+//                 g3: 0,
+//                 g4: 0,
+//                 g5: 0,
+//                 g6: 0,
+//                 g7: 0,
+//                 g8: 0,
+//                 g9: 0,
+//                 g10: 0,
+//                 g11: 0,
+//                 g12: 0,
+//                 g13: 0,
+//                 g14: 0,
+//                 g15: 0,
+//                 g16: 0,
+//                 g17: 0,
+//                 g18: 0,
+//                 g19: 0,
+//                 g20: 0,
+//                 g21: 0,
+//                 g22: 0,
+//                 g23: 0,
+//                 g24: 0
+//             }
+//             allReport.forEach(elem => {
+//                 for(let i = 1; i < 25; i++){
+//                     yigindilar["g"+i] = yigindilar["g"+i] + (+elem.col["g"+i])
+//                 }
+//             })
+//             res.render('main_staff', {
+//                 user: user,
+//                 count: count,
+//                 report: report,
+//                 offset: offset,
+//                 yigindilar: yigindilar
+//             });
+//         } else {
+//             res.render('login_staff', {
+
+//             });
+//         }
+//     } catch (ex) {
+//         res.render('login_staff', {
+
+//         });
+//     }
+// });
 
 router.put('/update_report', async(req, res) => {
     data = req.body.data;

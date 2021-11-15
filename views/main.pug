@@ -18,19 +18,19 @@ html(lang="en")
                             .card
                                 .card-body.main-card
                                     h5.card-title 
-                                        != `Turar joylar soni <span id='xonadon'>${turar_joy}</span> ta`
+                                        != `Tumanda ro'yxatga olingan turar joylar soni <br/> <span id='xonadon'>${turar_joy}</span> ta`
                         .col-sm-6
                             .card
                                 .card-body.main-card
                                     h5.card-title
-                                        != `Aholi soni <span id='aholi'>${aholi}</span> ta`
+                                        != `Tumanda ro'yxatga olingan aholi soni <br/> <span id='aholi'>${aholi}</span> ta`
             .table-container.table-responsive#tab
                 table.table.table-bordered
                     thead
                         tr
                             th(scope="col" rowspan="3") T/r
                             th(scope="col" rowspan="3") Hisob uchastkasi nomi
-                            th(scope="col" colspan="24") Suhbat o'tkazilgan honadonlar va ro'yxatga olingan shahslar soni (1 va 2-shakil bo'yicha)
+                            th(scope="col" colspan="24") Suhbat o'tkazilgan xonadonlar va ro'yxatga olingan shaxslar soni (1 va 2-shakl bo'yicha)
                             th(scope="col" rowspan="2" colspan="2") Jami
                         tr
                             th(scope="col" colspan="2") 11-noyabr
@@ -216,9 +216,9 @@ html(lang="en")
                                 span(class="summa-col" col-number=`g26`)= aholi
             p(style="padding: 0 10px; text-align: right; margin-top: -15px")
                 if offset - 15 > -15
-                    a.pagination-link(href=`/next?user_id=${user._id}&offset=${offset-10}`)= `<Oldingi`
+                    a.pagination-link(href=`/next?user_id=${user._id}&offset=${offset-15}`)= `<Oldingi`
                 if  offset + 15 < count
-                    a.pagination-link(href=`/next?user_id=${user._id}&offset=${offset+10}`)= `Keyingi>`
+                    a.pagination-link(href=`/next?user_id=${user._id}&offset=${offset+15}`)= `Keyingi>`
         - 
             turar_joy = yigindilar.g1 + yigindilar.g3 + yigindilar.g5 + yigindilar.g7 + yigindilar.g9 + yigindilar.g11 + yigindilar.g13 + yigindilar.g15 + yigindilar.g17 + yigindilar.g19 + yigindilar.g21 + yigindilar.g23
             aholi = yigindilar.g2 + yigindilar.g4 + yigindilar.g6 + yigindilar.g8 + yigindilar.g10 + yigindilar.g12 + yigindilar.g14 + yigindilar.g16 + yigindilar.g18 + yigindilar.g20 + yigindilar.g22 + yigindilar.g24     
@@ -229,6 +229,8 @@ html(lang="en")
                 li.nav-item
                     a(class="nav-link" href="/staff") Xodimlar
         ul.nav.justify-content-center
+            li.nav-item
+                        a(class="nav-link" href=`/republic`) Respublika bo'yicha
             each item in users
                 if item._id+"" != user._id+""
                     li.nav-item
@@ -236,10 +238,9 @@ html(lang="en")
                 else 
                     li.nav-item 
                         span(class="nav-link" href=`/?user_id=${item._id}`)= item.full_name
-        .container
-            h5.text-center Sinov o'tkazilayotgan tumanlar
+        h5.all-person= `Respublikada jami ro'yhatga olingan aholi  soni ${person_count} ta`
+        h5.all-person= `Respublikada jami ro'yhatga olingan xonadonlar soni ${t_j_count} ta`
         +createTable(user,report,offset,turar_joy,aholi)
         p(style="padding: 0 10px; text-align: right")
             a(class="btn btn-secondary" href=`/download?user_id=${user._id}`) Yuklab olish
         script(src="/js/main.js")
-        

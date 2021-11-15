@@ -19,29 +19,32 @@ html(lang="en")
                     a(class="nav-link" href="/") Bosh sahifa
                 li.nav-item
                     a(class="nav-link" href="/staff") Xodimlar
-            .main-numbers
-                h5.text-center= user.full_name
-                .row(style="padding-top: 10px; padding-bottom: 20px;")
+        ul.nav.justify-content-center
+            li.nav-item
+                span(class="nav-link" href=`/repablic`) Respublika bo'yicha
+            each item in users
+                li.nav-item
+                    a(class="nav-link" href=`/?user_id=${item._id}`)= item.full_name
+        .container
+            h5.all-person Respublika bo'yicha natijalar
+            .main-numbers(style="padding-top: 0")
+                .row
                     .col-sm-6
                         .card
                             .card-body.main-card
                                 h5.card-title 
-                                    != `Turar joylar soni <span id='xonadon'>${turar_joy}</span> ta`
+                                    != `Ro'yxatga olingan turar joylar soni <span id='xonadon'>${turar_joy}</span> ta`
                     .col-sm-6
                         .card
                             .card-body.main-card
                                 h5.card-title
-                                    != `Aholi soni <span id='aholi'>${aholi}</span> ta`
-        .container
-            div.form-inline.row.justify-content-center
-                input.form-control.mr-sm-2#search-input(type='search' placeholder='Qidirish' aria-label='Search' value=`${temp}`)
-                button.btn.btn-outline-success.my-2.my-sm-0#search-btn(data_href=`/staff/next?user_id=${user._id}&offset=${0}`) Qidirish
+                                    != `Ro'yxatga olingan aholi soni <span id='aholi'>${aholi}</span> ta`
         .table-container.table-responsive#tab
             table.table.table-bordered
                 thead
                     tr
                         th(scope="col" rowspan="3") T/r
-                        th(scope="col" rowspan="3") Hisob uchastkasi nomi
+                        th(scope="col" rowspan="3") Sinov hududlari
                         th(scope="col" colspan="24") Suhbat o'tkazilgan xonadonlar va ro'yxatga olingan shaxslar soni (1 va 2-shakl bo'yicha)
                         th(scope="col" rowspan="2" colspan="2") Jami
                     tr
@@ -112,61 +115,61 @@ html(lang="en")
                             span Shaxslar soni
                 tbody
                     - let tr = 0
-                    each item in report
+                    each item in districts 
                         - 
                             tr++
-                        tr(data-uchastka-id=`${item._id}` class="hisob-uchastka" data-row-number=`${item.number}`) 
+                        tr.hisob-uchastka
                             th= tr 
                             th
-                                input#name(type="text", name="name", value=`${item.name}` disabled)
+                                input#name(type="text", name="name", value=`${item.user.main_name}` disabled)
                             td 
-                                input(data-row=`row${tr}` data-date="11:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g1` type="number" name="g1", value=`${(item.col.g1)?item.col.g1:''}`)
+                                input(data-row=`row${tr}` data-col=`g1` type="number" disabled name="g1", value=`${(item.report.g1)?item.report.g1:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="11:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g2` type="number" name="g2", value=`${(item.col.g2)?item.col.g2:''}`)
+                                input(data-row=`row${tr}` data-col=`g2` type="number" disabled name="g2", value=`${(item.report.g2)?item.report.g2:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="12:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g3` type="number" name="g3", value=`${(item.col.g3)?item.col.g3:''}`)
+                                input(data-row=`row${tr}` data-col=`g3` type="number" disabled name="g3", value=`${(item.report.g3)?item.report.g3:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="12:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g4` type="number" name="g4", value=`${(item.col.g4)?item.col.g4:''}`)
+                                input(data-row=`row${tr}` data-col=`g4` type="number" disabled name="g4", value=`${(item.report.g4)?item.report.g4:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="13:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g5` type="number" name="g5", value=`${(item.col.g5)?item.col.g5:''}`)
+                                input(data-row=`row${tr}` data-col=`g5` type="number" disabled name="g5", value=`${(item.report.g5)?item.report.g5:''}`)
                             td
-                                input(data-row=`row${tr}` data-date="13:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g6` type="number" name="g6", value=`${(item.col.g6)?item.col.g6:''}`)
+                                input(data-row=`row${tr}` data-col=`g6` type="number" disabled name="g6", value=`${(item.report.g6)?item.report.g6:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="14:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g7` type="number" name="g7", value=`${(item.col.g7)?item.col.g7:''}`)
+                                input(data-row=`row${tr}` data-col=`g7` type="number" disabled name="g7", value=`${(item.report.g7)?item.report.g7:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="14:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g8` type="number" name="g8", value=`${(item.col.g8)?item.col.g8:''}`)
+                                input(data-row=`row${tr}` data-col=`g8` type="number" disabled name="g8", value=`${(item.report.g8)?item.report.g8:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="15:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g9` type="number" name="g9", value=`${(item.col.g9)?item.col.g9:''}`)
+                                input(data-row=`row${tr}` data-col=`g9` type="number" disabled name="g9", value=`${(item.report.g9)?item.report.g9:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="15:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g10` type="number" name="g10", value=`${(item.col.g10)?item.col.g10:''}`)
+                                input(data-row=`row${tr}` data-col=`g10` type="number" disabled name="g10", value=`${(item.report.g10)?item.report.g10:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="16:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g11` type="number" name="g11", value=`${(item.col.g11)?item.col.g11:''}`)
+                                input(data-row=`row${tr}` data-col=`g11` type="number" disabled name="g11", value=`${(item.report.g11)?item.report.g11:''}`)
                             td
-                                input(data-row=`row${tr}` data-date="16:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g12` type="number" name="g12", value=`${(item.col.g12)?item.col.g12:''}`)
+                                input(data-row=`row${tr}` data-col=`g12` type="number" disabled name="g12", value=`${(item.report.g12)?item.report.g12:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="17:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g13` type="number" name="g13", value=`${(item.col.g13)?item.col.g13:''}`)
+                                input(data-row=`row${tr}` data-col=`g13` type="number" disabled name="g13", value=`${(item.report.g13)?item.report.g13:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="17:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g14` type="number" name="g14", value=`${(item.col.g14)?item.col.g14:''}`)
+                                input(data-row=`row${tr}` data-col=`g14` type="number" disabled name="g14", value=`${(item.report.g14)?item.report.g14:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="18:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g15` type="number" name="g15", value=`${(item.col.g15)?item.col.g15:''}`)
+                                input(data-row=`row${tr}` data-col=`g15` type="number" disabled name="g15", value=`${(item.report.g15)?item.report.g15:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="18:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g16` type="number" name="g16", value=`${(item.col.g16)?item.col.g16:''}`)
+                                input(data-row=`row${tr}` data-col=`g16` type="number" disabled name="g16", value=`${(item.report.g16)?item.report.g16:''}`)
                             td
-                                input(data-row=`row${tr}` data-date="19:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g17` type="number" name="g17", value=`${(item.col.g17)?item.col.g17:''}`)
+                                input(data-row=`row${tr}` data-col=`g17` type="number" disabled name="g17", value=`${(item.report.g17)?item.report.g17:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="19:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g18` type="number" name="g18", value=`${(item.col.g18)?item.col.g18:''}`)
+                                input(data-row=`row${tr}` data-col=`g18` type="number" disabled name="g18", value=`${(item.report.g18)?item.report.g18:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="20:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g19` type="number" name="g19", value=`${(item.col.g19)?item.col.g19:''}`)
+                                input(data-row=`row${tr}` data-col=`g19` type="number" disabled name="g19", value=`${(item.report.g19)?item.report.g19:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="20:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g20` type="number" name="g20", value=`${(item.col.g20)?item.col.g20:''}`)
+                                input(data-row=`row${tr}` data-col=`g20` type="number" disabled name="g20", value=`${(item.report.g20)?item.report.g20:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="21:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g21` type="number" name="g21", value=`${(item.col.g21)?item.col.g21:''}`)
+                                input(data-row=`row${tr}` data-col=`g21` type="number" disabled name="g21", value=`${(item.report.g21)?item.report.g21:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="21:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g22` type="number" name="g22", value=`${(item.col.g22)?item.col.g22:''}`)
+                                input(data-row=`row${tr}` data-col=`g22` type="number" disabled name="g22", value=`${(item.report.g22)?item.report.g22:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="22:0" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g23` type="number" name="g23", value=`${(item.col.g23)?item.col.g23:''}`)
+                                input(data-row=`row${tr}` data-col=`g23` type="number" disabled name="g23", value=`${(item.report.g23)?item.report.g23:''}`)
                             td 
-                                input(data-row=`row${tr}` data-date="22:1" min="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57' data-col=`g24` type="number" name="g24", value=`${(item.col.g24)?item.col.g24:''}`)
+                                input(data-row=`row${tr}` data-col=`g24` type="number" disabled name="g24", value=`${(item.report.g24)?item.report.g24:''}`)
                             td 
                                 span(class="summa-row" data-col=`g25` row-number=`row${tr}`)= 0
                             td 
@@ -226,20 +229,6 @@ html(lang="en")
                             span(class="summa-col" col-number=`g25`)= turar_joy
                         td 
                             span(class="summa-col" col-number=`g26`)= aholi
-        p(style="padding: 0 10px; text-align: right; margin-top: -15px")
-            if offset - 10 > -10
-                button.btn.btn-outline-secondary.my-2.my-sm-0.mx-1#btn-next(data_href=`/staff/next?user_id=${user._id}&offset=${offset-10}&temp=${temp}`)= `<Oldingi`
-            if  offset + 10 < count
-                button.btn.btn-outline-secondary.my-2.my-sm-0.mx-1#btn-prev(data_href=`/staff/next?user_id=${user._id}&offset=${offset+10}&temp=${temp}`)= `Keyingi>`
         p(style="padding: 0 10px; text-align: right")
-            button(type="button" class="btn btn-secondary" id="update_report") Saqlash
-        div#modal-errors.dbn
-            .modal-dialog.modal-dialog-centered
-                .modal-content.scroll-error
-                    .modal-header
-                        h5#exampleModalCenterTitle.modal-title Xatoliklar
-                    .modal-body#body-error
-                        
-                    .modal-footer
-                        button.btn.btn-secondary#close-error(type='button' data-dismiss='modal') Chiqish
-        script(src="/js/main.js") 
+            a(class="btn btn-secondary" href=`/download/all`) Yuklab olish
+        script(src="/js/main.js")

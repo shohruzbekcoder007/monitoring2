@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
     full_name: { 
         type: String, 
         required: true 
+    },
+    main_name: { 
+        type: String,
+        required: true
     }
 });
 const User = mongoose.model("users", UserSchema);
